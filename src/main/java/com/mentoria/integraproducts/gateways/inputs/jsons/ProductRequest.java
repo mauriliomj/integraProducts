@@ -20,6 +20,7 @@ public class ProductRequest {
     Product product = new Product();
     product.setSellerId(sellerId);
     product.setSku(sku);
+    product.setProductName(this.productName);
     product.setDescription(this.description);
     product.setSize(this.size);
     product.setColor(this.color);

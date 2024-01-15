@@ -13,6 +13,6 @@ public interface ProductDataGateway {
 
     Optional<Product> findBySkuAndSellerId(String sku, String sellerId);
 
-    Page<Product> findAllByCategory(String sellerId , String brand, String category, PageRequest pageable);
-
+    Page<Product> findBySellerIdAndBrandAndCategory(String brand , String category, String sellerId,
+        PageRequest pageable);
 }

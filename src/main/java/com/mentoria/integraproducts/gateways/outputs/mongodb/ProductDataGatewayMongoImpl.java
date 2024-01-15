@@ -4,6 +4,8 @@ import com.mentoria.integraproducts.domains.Product;
 import com.mentoria.integraproducts.gateways.outputs.ProductDataGateway;
 import com.mentoria.integraproducts.gateways.outputs.mongodb.repositories.ProductRepository;
 import com.mentoria.integraproducts.gateways.outputs.mongodb.documents.ProductDocument;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,9 +34,9 @@ public class ProductDataGatewayMongoImpl implements ProductDataGateway {
     }
 
     @Override
-    public Page<Product> findAllByCategory(String sellerId, String brand, String category,
-        PageRequest pageable){
-        return productRepository.findAllByCategory(sellerId, brand, category, pageable).
-            map(ProductDocument::toDomain);
+    public Page<Product> findBySellerIdAndBrandAndCategory(String brand, String category,
+        String sellerId, PageRequest pageable){
+        return productRepository.findBySellerIdAndBrandAndCategory(brand, category, sellerId,
+                pageable).map(ProductDocument::toDomain);
     }
 }

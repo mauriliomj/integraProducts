@@ -6,28 +6,28 @@ import com.mentoria.integraproducts.gateways.outputs.ProductDataGateway;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
 public class AddProduct {
 
+  @Autowired
   private ProductDataGateway productDataGateway;
 
   public void execute(Product product) {
 
-    Optional<Product> existingProduct = productDataGateway
-        .findBySkuAndSellerId(product.getSku(),product.getSellerId());
+    boolean validation = new CheckSellerId().validation(product.getSellerId());
 
-    if (existingProduct.isPresent()) {
-
-      throw new AlreadyRegisteredException("Produto já cadastrado para o sellerId");
-
-    } else{
+    if(validation) {
+      if (productDataGateway.findBySkuAndSellerId(product.getSku(), product.getSellerId())
+          .isPresent()) {
+        throw new AlreadyRegisteredException("Produto já cadastrado para o sellerId");
+      }
       product.setCreatedDate(LocalDateTime.now());
       product.setLastModifiedDate(LocalDateTime.now());
       productDataGateway.save(product);
-
     }
   }
 }

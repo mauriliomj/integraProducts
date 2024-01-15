@@ -4,7 +4,7 @@ import com.mentoria.integraproducts.domains.Product;
 import com.mentoria.integraproducts.gateways.inputs.jsons.ProductRequest;
 import com.mentoria.integraproducts.usecases.AddProduct;
 import com.mentoria.integraproducts.usecases.GetProduct;
-import com.mentoria.integraproducts.usecases.GetProductsByCategory;
+import com.mentoria.integraproducts.usecases.GetProductsByFilter;
 import com.mentoria.integraproducts.usecases.UpdateProduct;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class ProductController {
   @Autowired
   private UpdateProduct updateProduct;
   @Autowired
-  private GetProductsByCategory getProductsByCategory;
+  private GetProductsByFilter getProductsByFilter;
 
   @PostMapping("/{sku}")
-  @ApiOperation("Cadastra os preços a um determinado produto.")
+  @ApiOperation("Cadastra os produtos.")
   public void addProduct(@RequestHeader String sellerId, @PathVariable String sku,
       @RequestBody ProductRequest productRequest) {
 
@@ -34,7 +34,7 @@ public class ProductController {
   }
 
   @GetMapping("/{sku}")
-  @ApiOperation("Pesquisa e retorna o preço pelo sku e sellerId.")
+  @ApiOperation("Pesquisa e retorna o produto pelo sku e sellerId.")
   public Product getProduct(@RequestHeader String sellerId,@PathVariable String sku) {
 
     return getProduct.execute(sku, sellerId);
@@ -42,7 +42,7 @@ public class ProductController {
   }
 
   @PutMapping("/{sku}")
-  @ApiOperation("Atualiza os preços cadastrados.")
+  @ApiOperation("Atualiza os produtos cadastrados.")
   public void updateProduct(@RequestHeader String sellerId, @PathVariable String sku,
       @RequestBody ProductRequest productRequest) {
 
@@ -52,11 +52,12 @@ public class ProductController {
 
   @GetMapping
   @ApiOperation("Pesquisa e retorna os produtos de acordo com a categoria")
-  public Page<Product> getAllProductsByCategory(@RequestHeader String sellerId,
-      @RequestParam String brand, @RequestParam String category,
+  public Page<Product> getAllProductsByCategory(@RequestParam String brand,
+      @RequestParam String category,
+      @RequestHeader String sellerId,
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "10") int size){
-    return getProductsByCategory.execute(sellerId, brand, category, size, page);
+    return getProductsByFilter.execute(sellerId, brand, category, size, page);
 
   }
 }
