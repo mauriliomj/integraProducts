@@ -21,7 +21,8 @@ public class AddProduct {
   public SellersDataGateway sellersDataGateway;
 
   public void execute(Product product) {
-    boolean validation = new CheckSellerId(this.sellersDataGateway).validation(product.getSellerId());
+    boolean validation = new CheckSellerId(this.sellersDataGateway)
+        .validation(product.getSellerId());
 
     if(validation) {
       if (productDataGateway.findBySkuAndSellerId(product.getSku(), product.getSellerId())
