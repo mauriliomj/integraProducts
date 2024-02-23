@@ -6,12 +6,10 @@ import com.mentoria.integraProducts.exceptions.NotFoundException;
 import com.mentoria.integraProducts.gateways.outputs.ProductDataGateway;
 import com.mentoria.integraProducts.gateways.outputs.SellersDataGateway;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class AddProduct {
 
   @Autowired
@@ -20,9 +18,11 @@ public class AddProduct {
   @Autowired
   public SellersDataGateway sellersDataGateway;
 
+  @Autowired
+  private CheckSellerId checkSellerId;
+
   public void execute(Product product) {
-    boolean validation = new CheckSellerId(this.sellersDataGateway)
-        .validation(product.getSellerId());
+    boolean validation = checkSellerId.validation(product.getSellerId());
 
     if(validation) {
       if (productDataGateway.findBySkuAndSellerId(product.getSku(), product.getSellerId())

@@ -25,26 +25,24 @@ class UpdateProductTest {
 
   @Test
   public void shouldChangeAPriceBySkuAndSellerId() {
-
     Mockito.when(
-            productDataGateway.findBySkuAndSellerId(mockProduct().getSku(), mockProduct().getSellerId()))
+            productDataGateway.findBySkuAndSellerId(mockProductUpdated().getSku(),
+                mockProductUpdated().getSellerId()))
         .thenReturn(Optional.of(mockProduct()));
 
     updateProduct.execute(mockProductUpdated());
 
     Mockito.verify(productDataGateway).save(mockProductUpdated());
-
   }
 
   @Test
   public void shouldThrowExceptionForNotFindingId() {
-
-    Mockito.when(productDataGateway.findBySkuAndSellerId(any(), any()))
+    Mockito.when(productDataGateway.findBySkuAndSellerId(mockProductUpdated().getSku(),
+            mockProductUpdated().getSellerId()))
         .thenThrow(new NotFoundException("Id não encontrado."));
 
     Assertions.assertThrows(NotFoundException.class, () -> updateProduct
         .execute(mockProductUpdated()));
-
   }
 
   public Product mockProduct() {
@@ -57,9 +55,9 @@ class UpdateProductTest {
   }
 
   public Product mockProductUpdated() {
-
     Product mockProductUpdated = new Product();
+    mockProductUpdated.setSku("SkuTest");
+    mockProductUpdated.setSellerId("IdTest");
     return mockProductUpdated;
-
   }
 }

@@ -8,12 +8,7 @@ import org.springframework.stereotype.Component;
 public class CheckSellerId {
 
   @Autowired
-  private final SellersDataGateway sellersDataGateway;
-
-  @Autowired
-  public CheckSellerId(SellersDataGateway sellersDataGateway) {
-    this.sellersDataGateway = sellersDataGateway;
-  }
+  private SellersDataGateway sellersDataGateway;
 
   public Boolean validation(String sellerId) {
     return sellersDataGateway.exists(sellerId);

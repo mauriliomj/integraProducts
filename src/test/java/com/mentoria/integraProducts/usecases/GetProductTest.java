@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class GetProductTest {
-
   @InjectMocks
   private GetProduct getProduct;
   @Mock
@@ -30,12 +29,10 @@ class GetProductTest {
     Product actualProduct = getProduct.execute(mockProduct().getSku(), mockProduct().getSellerId());
 
     Assertions.assertEquals(expectedProduct, actualProduct);
-
   }
 
   @Test
   public void shouldThrowAnException() {
-
     Mockito.when(productDataGateway
             .findBySkuAndSellerId(mockProduct().getSku(), mockProduct().getSellerId()))
         .thenReturn(Optional.empty());
@@ -45,15 +42,12 @@ class GetProductTest {
 
     Mockito.verify(productDataGateway).findBySkuAndSellerId(mockProduct().getSku(),
         mockProduct().getSellerId());
-
   }
 
   public Product mockProduct() {
-
     Product mockProduct = new Product();
     mockProduct.setSku("SkuTest");
     mockProduct.setSellerId("IdTest");
     return mockProduct;
-
   }
 }
