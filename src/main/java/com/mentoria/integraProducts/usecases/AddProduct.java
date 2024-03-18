@@ -3,8 +3,8 @@ package com.mentoria.integraProducts.usecases;
 import com.mentoria.integraProducts.domains.Product;
 import com.mentoria.integraProducts.exceptions.AlreadyRegisteredException;
 import com.mentoria.integraProducts.exceptions.NotFoundException;
+import com.mentoria.integraProducts.gateways.outputs.CheckSellerId;
 import com.mentoria.integraProducts.gateways.outputs.ProductDataGateway;
-import com.mentoria.integraProducts.gateways.outputs.SellersDataGateway;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,13 +16,11 @@ public class AddProduct {
   private ProductDataGateway productDataGateway;
 
   @Autowired
-  public SellersDataGateway sellersDataGateway;
-
-  @Autowired
   private CheckSellerId checkSellerId;
 
   public void execute(Product product) {
-    boolean validation = checkSellerId.validation(product.getSellerId());
+
+    boolean validation = checkSellerId.validate(product.getSellerId());
 
     if(validation) {
       if (productDataGateway.findBySkuAndSellerId(product.getSku(), product.getSellerId())

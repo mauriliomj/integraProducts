@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Component
 @FeignClient(name = "sellerIntegration", url = "${integration.seller.url}", decode404 = true)
 public interface SellersFeignIntegration {
-  @GetMapping(path = "/sellers/{sellerId}", consumes = APPLICATION_JSON_VALUE)
+  @GetMapping(path = "sellers/{sellerId}", consumes = APPLICATION_JSON_VALUE)
   Optional<SellerResource> get(@PathVariable("sellerId") final String sellerId);
 }

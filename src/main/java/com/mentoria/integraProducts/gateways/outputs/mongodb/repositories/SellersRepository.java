@@ -1,7 +1,8 @@
 package com.mentoria.integraProducts.gateways.outputs.mongodb.repositories;
 
 import com.mentoria.integraProducts.gateways.outputs.mongodb.documents.SellerDocument;
-import java.util.Optional;
+import org.ff4j.aop.Flip;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+@Flip(name="find-seller-on-http", alterBean = "SellersDataGatewayHttpImpl")
 public interface SellersRepository extends PagingAndSortingRepository<SellerDocument, String> {}

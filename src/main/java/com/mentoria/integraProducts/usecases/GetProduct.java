@@ -10,13 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class GetProduct {
-
   @Autowired
   private ProductDataGateway productDataGateway;
 
   public Product execute(String sku, String sellerId) {
     return productDataGateway.findBySkuAndSellerId(sku, sellerId).orElseThrow(() ->
         new NotFoundException("Sku/sellerId não encontrado!"));
-
   }
 }

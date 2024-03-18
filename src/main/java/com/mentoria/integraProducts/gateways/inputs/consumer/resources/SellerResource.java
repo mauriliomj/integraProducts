@@ -1,7 +1,6 @@
 package com.mentoria.integraProducts.gateways.inputs.consumer.resources;
 
 import com.mentoria.integraProducts.domains.Seller;
-import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
