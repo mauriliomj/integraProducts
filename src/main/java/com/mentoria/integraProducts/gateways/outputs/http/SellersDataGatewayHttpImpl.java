@@ -25,6 +25,6 @@ public boolean exists(String sellerId) {
 
 @Override
 public void save(Seller seller) {
-  throw new RuntimeException("Não implementado.");
+  throw new RuntimeException("Não implementado!");
 }
 }
