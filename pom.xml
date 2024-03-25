@@ -103,6 +103,11 @@
 			<artifactId>ff4j-aop</artifactId>
 			<version>1.8.12</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ff4j</groupId>
+			<artifactId>ff4j-spring-boot-web-api</artifactId>
+			<version>1.8.8</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

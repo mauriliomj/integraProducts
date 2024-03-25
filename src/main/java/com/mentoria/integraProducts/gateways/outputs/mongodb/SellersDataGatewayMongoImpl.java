@@ -6,10 +6,12 @@ import com.mentoria.integraProducts.gateways.outputs.mongodb.documents.SellerDoc
 import com.mentoria.integraProducts.gateways.outputs.mongodb.repositories.SellersRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@Primary
 public class SellersDataGatewayMongoImpl implements SellersDataGateway {
 
   @Autowired

@@ -11,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component("SellersDataGatewayHttpImpl")
+@Component("sellersDataGatewayHttpImpl")
 @RequiredArgsConstructor
 public class SellersDataGatewayHttpImpl implements SellersDataGateway {
-
   @Autowired
 public SellersFeignIntegration sellersFeignIntegration;
 

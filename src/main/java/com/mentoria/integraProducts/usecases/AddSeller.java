@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class AddSeller {
   @Autowired
   private CheckSellerId checkSellerId;
-
   @Autowired
   private SellersRepository sellersRepository;
 
